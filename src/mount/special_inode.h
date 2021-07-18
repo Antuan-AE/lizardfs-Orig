@@ -49,6 +49,10 @@ namespace InodeOplog {
 	extern const Attributes attr;
 	extern const LizardClient::Inode inode_;
 }
+namespace InodeAntuan {
+	extern const Attributes attr;
+	extern const LizardClient::Inode inode_;
+}
 
 namespace InodeOphistory {
 	extern const Attributes attr;

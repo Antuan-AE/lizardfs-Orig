@@ -93,6 +93,7 @@ namespace LizardClient {
 #define IS_SPECIAL_INODE(ino) ((ino)>=SPECIAL_INODE_BASE)
 #define IS_SPECIAL_NAME(name) ((name)[0]=='.' && (strcmp(SPECIAL_FILE_NAME_STATS,(name))==0 \
 		|| strcmp(SPECIAL_FILE_NAME_MASTERINFO,(name))==0 || strcmp(SPECIAL_FILE_NAME_OPLOG,(name))==0 \
+		|| strcmp(SPECIAL_FILE_NAME_ANTUAN, (name))==0 \
 		|| strcmp(SPECIAL_FILE_NAME_OPHISTORY,(name))==0 || strcmp(SPECIAL_FILE_NAME_TWEAKS,(name))==0 \
 		|| strcmp(SPECIAL_FILE_NAME_FILE_BY_INODE,(name))==0))
 
@@ -185,7 +186,9 @@ Inode getSpecialInodeByName(const char *name) {
 	} else if (strcmp(name, SPECIAL_FILE_NAME_TWEAKS) == 0) {
 		return SPECIAL_INODE_TWEAKS;
 	} else if (strcmp(name, SPECIAL_FILE_NAME_OPLOG) == 0) {
-		return SPECIAL_INODE_OPLOG;
+		return SPECIAL_INODE_OPLOG;		
+	} else if (strcmp(name, SPECIAL_FILE_NAME_ANTUAN) == 0) {
+		return SPECIAL_INODE_ANTUAN;
 	} else if (strcmp(name, SPECIAL_FILE_NAME_OPHISTORY) == 0) {
 		return SPECIAL_INODE_OPHISTORY;
 	} else if (strcmp(name, SPECIAL_FILE_NAME_FILE_BY_INODE) == 0) {
