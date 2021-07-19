@@ -65,6 +65,20 @@ static AttrReply getattr(const Context &ctx, char (&attrstr)[256]) {
 }
 } // InodeOplog
 
+namespace InodeAntuan {
+static AttrReply getattr(const Context &ctx, char (&attrstr)[256]) {
+	struct stat o_stbuf;
+	memset(&o_stbuf, 0, sizeof(struct stat));
+	attr_to_stat(inode_, attr, &o_stbuf);
+	stats_inc(OP_GETATTR);
+	makeattrstr(attrstr, 256, &o_stbuf);
+	oplog_printf(ctx, "getattr (%lu) (internal node: ANTUAN): OK (3600,%s)",
+				static_cast<u_long>(inode_),
+				attrstr);
+	return AttrReply{ o_stbuf, 3600.0 };
+}
+} //InodeAntuan
+
 namespace InodeOphistory {
 static AttrReply getattr(const Context &ctx, char (&attrstr)[256]) {
 	struct stat o_stbuf;
@@ -119,7 +133,7 @@ static const std::array<GetAttrFunc, 16> funcs = {{
 	 nullptr,                       //0x7U
 	 nullptr,                       //0x8U
 	 nullptr,                       //0x9U
-	 nullptr,                       //0xAU
+	 &InodeAntuan::getattr,         //0xAU
 	 nullptr,                       //0xBU
 	 nullptr,                       //0xCU
 	 nullptr,                       //0xDU

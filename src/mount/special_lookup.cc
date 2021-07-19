@@ -86,6 +86,19 @@ static EntryParam lookup(const Context &ctx, Inode parent, const char *name,
 }
 } // InodeOplog
 
+namespace InodeAntuan {
+static EntryParam lookup(_IsUnused const Context &ctx, _IsUnused Inode parent,
+						_IsUnused const char *name, _IsUnused char attrstr[256]) {
+	EntryParam e;
+	e.ino = inode_;
+	e.attr_timeout = 3600.0;
+	e.entry_timeout = 3600.0;
+	attr_to_stat(inode_, attr, &e.attr);
+
+	return e;
+}
+} // InodeAntuan
+
 namespace InodeOphistory {
 static EntryParam lookup(const Context &ctx, Inode parent, const char *name,
 	                          char attrstr[256]) {
@@ -161,7 +174,7 @@ static const std::array<std::function<EntryParam
 	 nullptr,                       //0x7U
 	 nullptr,                       //0x8U
 	 nullptr,                       //0x9U
-	 nullptr,                       //0xAU
+	 &InodeAntuan::lookup,          //0xAU
 	 nullptr,                       //0xBU
 	 nullptr,                       //0xCU
 	 nullptr,                       //0xDU
