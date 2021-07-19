@@ -186,7 +186,7 @@ Inode getSpecialInodeByName(const char *name) {
 	} else if (strcmp(name, SPECIAL_FILE_NAME_TWEAKS) == 0) {
 		return SPECIAL_INODE_TWEAKS;
 	} else if (strcmp(name, SPECIAL_FILE_NAME_OPLOG) == 0) {
-		return SPECIAL_INODE_OPLOG;		
+		return SPECIAL_INODE_OPLOG;
 	} else if (strcmp(name, SPECIAL_FILE_NAME_ANTUAN) == 0) {
 		return SPECIAL_INODE_ANTUAN;
 	} else if (strcmp(name, SPECIAL_FILE_NAME_OPHISTORY) == 0) {

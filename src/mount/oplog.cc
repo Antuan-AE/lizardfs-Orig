@@ -123,7 +123,7 @@ void oplog_printf(const struct LizardClient::Context &ctx,const char *format,...
 
 	leng = std::min(LINELENG - 1, leng);
 	buff[leng++] = '\n';
-	oplog_put((uint8_t*)buff, leng);
+	oplog_put(reinterpret_cast<uint8_t*>(buff), leng);
 }
 
 void oplog_printf(const char *format, ...) {
@@ -151,7 +151,7 @@ void oplog_printf(const char *format, ...) {
 
 	leng = std::min(LINELENG - 1, leng);
 	buff[leng++] = '\n';
-	oplog_put((uint8_t*)buff, leng);
+	oplog_put(reinterpret_cast<uint8_t*>(buff), leng);
 }
 
 unsigned long oplog_newhandle(int hflag) {

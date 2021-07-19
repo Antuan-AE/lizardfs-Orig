@@ -41,20 +41,20 @@ const Inode InodeStats::inode_ = SPECIAL_INODE_STATS;
 
 // 0x0100 == 0b100000000 == 0400
 const Attributes InodeOplog::attr =
-	  {{'f', 0x01,0x00, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0,0,0,0,0}};
+		{{'f', 0x01,0x00, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0,0,0,0,0}};
 const Inode InodeOplog::inode_ = SPECIAL_INODE_OPLOG;
 
 // 0x0124 == 0b100100100 == 0444
-const Attributes InodeAntuan::attr = 
-   {{'f', 
-     0x01, 0x24, /* 16bits Type of file attribute bitmasks. */
-     0,0,0,0,    /* 32bits uid: User ID of the file's owner. */
-     0,0,0,0,    /* 32bits gid: Group ID of the file's group. */
-     0,0,0,0,    /* 32bits atime: Time of last access. */
-     0,0,0,0,    /* 32bits mtime: Time of last modification. */
-     0,0,0,0,    /* 32bits ctime: Time of last status change. */
-     0,0,0,1,    /* 32bits nlink: Link count. */
-     0,0,0,0,0,0,0,0x0d}}; /* 64bits: Size of file, in bytes. */
+const Attributes InodeAntuan::attr =
+	{{'f',
+		0x01,0x24,		/* 16bits Type of file attribute bitmasks. */
+		0,0,0,0,			/* 32bits uid: User ID of the file's owner. */
+		0,0,0,0,			/* 32bits gid: Group ID of the file's group. */
+		0,0,0,0,			/* 32bits atime: Time of last access. */
+		0,0,0,0,			/* 32bits mtime: Time of last modification. */
+		0,0,0,0,			/* 32bits ctime: Time of last status change. */
+		0,0,0,1,			/* 32bits nlink: Link count. */
+		0,0,0,0,0,0,0,0x0d}};		/* 64bits: Size of file, in bytes. */
 const Inode InodeAntuan::inode_ = SPECIAL_INODE_ANTUAN;
 
 // 0x0100 == 0b100000000 == 0400

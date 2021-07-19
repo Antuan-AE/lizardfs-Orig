@@ -50,6 +50,9 @@ namespace InodeOplog {
 	extern const LizardClient::Inode inode_;
 }
 namespace InodeAntuan {
+#ifndef _IsUnused
+	#define _IsUnused __attribute__ ((__unused__))
+#endif
 	extern const Attributes attr;
 	extern const LizardClient::Inode inode_;
 }
