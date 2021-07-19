@@ -59,6 +59,13 @@ static void release(FileInfo *fi) {
 }
 } // InodeOplog
 
+namespace InodeAntuan {
+static void release(_IsUnused FileInfo *fi) {
+	oplog_printf("release (%lu) (internal node: ANTUAN): OK",
+	            static_cast<u_long>(inode_));
+}
+} // InodeAntuan
+
 namespace InodeOphistory {
 static void release(FileInfo *fi) {
 	oplog_releasehandle(fi->fh);
@@ -104,7 +111,7 @@ static const std::array<ReleaseFunc, 16> funcs = {{
 	 nullptr,                       //0x7U
 	 nullptr,                       //0x8U
 	 nullptr,                       //0x9U
-	 nullptr,                       //0xAU
+	 &InodeAntuan::release,         //0xAU
 	 nullptr,                       //0xBU
 	 nullptr,                       //0xCU
 	 nullptr,                       //0xDU

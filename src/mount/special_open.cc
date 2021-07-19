@@ -83,6 +83,19 @@ static void open(const Context &ctx, FileInfo *fi) {
 }
 } // InodeOplog
 
+namespace InodeAntuan {
+static void open(const Context &ctx, FileInfo *fi) {
+	if ((fi->flags & O_ACCMODE) != O_RDONLY) {
+		oplog_printf(ctx, "open (%lu) (internal node: ANTUAN): %s",
+		            static_cast<u_long>(inode_),
+		            lizardfs_error_string(LIZARDFS_ERROR_EACCES));
+		throw RequestException(LIZARDFS_ERROR_EACCES);
+	}
+	oplog_printf(ctx, "open (%lu) (internal node: ANTUAN): OK (1,0)",
+				static_cast<u_long>(inode_));
+}
+} // InodeAntuan
+
 namespace InodeOphistory {
 static void open(const Context &ctx, FileInfo *fi) {
 	if ((fi->flags & O_ACCMODE) != O_RDONLY) {
@@ -122,7 +135,7 @@ static const std::array<std::function<void
 	 nullptr,                       //0x7U
 	 nullptr,                       //0x8U
 	 nullptr,                       //0x9U
-	 nullptr,                       //0xAU
+	 &InodeAntuan::open,            //0xAU
 	 nullptr,                       //0xBU
 	 nullptr,                       //0xCU
 	 nullptr,                       //0xDU

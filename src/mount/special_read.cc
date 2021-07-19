@@ -132,6 +132,18 @@ static std::vector<uint8_t> read(const Context &ctx,
 }
 } // InodeOplog
 
+namespace InodeAntuan {
+static std::vector<uint8_t> read(_IsUnused const Context &ctx, size_t size,
+		off_t off, _IsUnused FileInfo *fi, int debug_mode) {
+	if (debug_mode) {
+		printDebugReadInfo(ctx, SPECIAL_INODE_ANTUAN, size, off);
+	}
+	char msg[] = "Hello World!\n";
+	auto ssize = strlen(msg);
+	return std::vector<uint8_t>(msg, msg + ssize);
+}
+} //InodeAntuan
+
 namespace InodeOphistory {
 static std::vector<uint8_t> read(const Context &ctx,
 		size_t size, off_t off, FileInfo *fi, int debug_mode) {
@@ -192,7 +204,7 @@ static const std::array<std::function<std::vector<uint8_t>
 	 nullptr,                       //0x7U
 	 nullptr,                       //0x8U
 	 nullptr,                       //0x9U
-	 nullptr,                       //0xAU
+	 &InodeAntuan::read,            //0xAU
 	 nullptr,                       //0xBU
 	 nullptr,                       //0xCU
 	 nullptr,                       //0xDU
